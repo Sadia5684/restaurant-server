@@ -8,7 +8,8 @@ const port = 5000
 app.use(express.json())
 app.use(cors())
 
-const uri = `mongodb+srv://db-user:Sadia12@cluster0.4uvzf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
+const uri = "mongodb+srv://db_user:admin123@cluster0.cc3o8.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
 const client = new MongoClient(uri, {
     serverApi: {
       version: ServerApiVersion.v1,
@@ -23,11 +24,17 @@ const client = new MongoClient(uri, {
     
       await client.connect();
       const menuCollection = client.db("Restaurant").collection("menu");
+      const reviewCollection = client.db("Restaurant").collection("review");
 
       app.get('/menu', async(req, res) => {
         const menuData = await
         menuCollection.find().toArray()
         res.send(menuData);
+      })
+      app.get('/review', async(req, res) => {
+        const reviewData = await
+        reviewCollection.find().toArray()
+        res.send(reviewData);
       })
 
         } finally {
